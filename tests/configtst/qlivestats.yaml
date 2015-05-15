@@ -1,0 +1,7 @@
+%YAML 1.2
+---
+logging:
+  format: "%(levelname) -10s %(asctime)s %(module)s:%(funcName)s()  %(message)s"
+  level: 10
+livestatus:
+  broker: "/usr/share/broker/livestatus"
