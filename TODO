@@ -1,0 +1,10 @@
+* Needs to be able to read configuration from a config file.
+  - config file needs to have livestats broker location
+  - has to have default location under /etc/qlivestats.conf
+
+* Needs to be able to connect to the livestatus broker socket.
+* Needs to be able to query the livestats broker for services with filters and coulumns.
+* Needs to be able to query the livestats broker for hosts with filters and coulumns.
+* Needs to be able to query the livestats broker for logs with date filter.
+* Needs to be able to get state history for both servers and hosts.
+* Needs to be able to query nagios contacts
