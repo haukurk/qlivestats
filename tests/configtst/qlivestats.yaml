@@ -1,6 +1,4 @@
 %YAML 1.2
 ---
-logging:
-  level: 10
 livestatus:
   broker: "/usr/share/broker/livestatus"
