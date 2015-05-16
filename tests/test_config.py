@@ -1,4 +1,5 @@
 import os
+import yaml
 
 from unittest import TestCase
 
@@ -22,9 +23,10 @@ class BasicConfigTest(TestCase):
         self.assertRaises(config.ConfigParsingError, lambda: list(config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestatsbad.yaml')).config))    
 
     def test_parsed_information(self):
-
         cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
-
         socket = cfg.config["livestatus"]["broker"]
-
         self.assertEqual(socket, "/usr/share/broker/livestatus") 
+
+    def test_tostring(self):
+        cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
+        self.assertEqual(yaml.dump(cfg.config),str(cfg))

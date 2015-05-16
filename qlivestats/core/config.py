@@ -35,11 +35,7 @@ class BaseHolder(object):
         return "%s(%s)" % (self.__class__.__name__, dict.__repr__(self))
 
     def __str__(self):
-        n = self._name
-        s = ["{}(name={!r}):".format(self.__class__.__name__, n)]
-        s = s + ["  {}.{} = {!r}".format(n, it[0], it[1]) for it in self.config.items()]
-        s.append("\n")
-        return "\n".join(s)
+        return yaml.dump(self.config) 
 
 
 class YAMLConfig(BaseHolder):
