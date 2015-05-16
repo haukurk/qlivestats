@@ -40,5 +40,5 @@ class BaseHolder(object):
 
 class YAMLConfig(BaseHolder):
     def get_filename(self):
-        return self.config
+        return self.filename
 
