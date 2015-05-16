@@ -34,3 +34,7 @@ class BasicConfigTest(TestCase):
     def test_representation(self):
         cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
         self.assertEqual("YAMLConfig (sections: 2)", cfg.__repr__())
+
+    def test_get_filename(self):
+        cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
+        self.assertEqual(cfg.get_filename(),os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
