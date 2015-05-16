@@ -3,3 +3,4 @@ tox
 mock
 pyyaml
 coverage
+coveralls
