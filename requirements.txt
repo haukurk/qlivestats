@@ -2,3 +2,4 @@ pytest
 tox
 mock
 pyyaml
+coverage
