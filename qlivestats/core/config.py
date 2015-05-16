@@ -32,7 +32,7 @@ class BaseHolder(object):
         self.filename = configfile
 
     def __repr__(self):
-        return "%s(%s)" % (self.__class__.__name__, dict.__repr__(self))
+        return "%s (sections: %s)" % (self.__class__.__name__, len(self.config))
 
     def __str__(self):
         return yaml.dump(self.config) 
@@ -40,5 +40,5 @@ class BaseHolder(object):
 
 class YAMLConfig(BaseHolder):
     def get_filename(self):
-        return self.config
+        return self.filename
 
