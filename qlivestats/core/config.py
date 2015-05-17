@@ -42,3 +42,6 @@ class YAMLConfig(BaseHolder):
     def get_filename(self):
         return self.filename
 
+    def get_broker(self):
+        return self.config["livestatus"]["broker"]
+
