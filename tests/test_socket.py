@@ -2,7 +2,6 @@ from qlivestats.core.qsocket import Socket, SocketConnectionError
 from qlivestats.core import config
 
 from unittest import TestCase
-import mox
 import os
 from tests import tests_dir
 os.chdir(tests_dir)
