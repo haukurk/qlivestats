@@ -38,3 +38,7 @@ class BasicConfigTest(TestCase):
     def test_get_filename(self):
         cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
         self.assertEqual(cfg.get_filename(),os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
+
+    def test_get_helper_broker(self):
+        cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
+        self.assertEqual(cfg.get_broker(), "/usr/share/broker/livestatus") 
