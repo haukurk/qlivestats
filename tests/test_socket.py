@@ -13,7 +13,7 @@ class SocketTests(TestCase):
         super(SocketTests, self).__init__(*args, **kwargs)
         self.cfg = config.YAMLConfig(os.path.join(tests_dir, 'configtst/qlivestats.yaml'))
 
-    def setUp(self):
+    #def setUp(self):
         #super(SocketTests, self).setUp()
         #self.mox = mox.Mox()
         #self.mock_socket = self.mox.CreateMockAnything(socket.socket)
