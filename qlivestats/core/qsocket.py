@@ -27,7 +27,14 @@ class Socket(BaseSocket):
             raise SocketConnectionTimeoutError('Timeout occured when connecting to UNIX socket (%s). Exception is %s' % (str(self.broker),str(e)))
         except socket.error, e:
             raise SocketConnectionError('Error when connecting to UNIX socket (%s). Exception is %s' % (str(self.broker),str(e)))
-    
+        return True
+
+    def get(self, cmd):
+        if self.connect():
+            self.socket.send(cmd)
+            self.close()
+            return self.socket.recv(100000000)
+
     def close(self):
         self.socket.close()
 
