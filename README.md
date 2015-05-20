@@ -5,42 +5,25 @@ QLiveStats is a library/client to query the Live Status broker for Nagios.
 
 # Live Status Querying
 
-*qlivestats* support the following tables to get information from:
-
-*qlivestats.hosts* - your Nagios hosts
-
-*qlivestats.services* - your Nagios services, joined with all data from hosts
-
-*qlivestats.hostgroups* - you Nagios hostgroups
-
-*qlivestats.servicegroups* - you Nagios servicegroups
-
-*qlivestats.contactgroups* - you Nagios contact groups
-
-*qlivestats.servicesbygroup* - all services grouped by service groups
-
-*qlivestats.servicesbyhostgroup* - all services grouped by host groups
-
-*qlivestats.hostsbygroup* - all hosts group by host groups
-
-*qlivestats.contacts* - your Nagios contacts
-
-*qlivestats.commands* - your defined Nagios commands
-
-*qlivestats.timeperiods* - time period definitions (currently only name and alias)
-
-*qlivestats.downtimes* - all scheduled host and service downtimes, joined with data from hosts and services.
-
-*qlivestats.comments* - all host and service comments
-
-*qlivestats.log* - a transparent access to the nagios logfiles (include archived ones)ones
-
-*qlivestats.status* - general performance and status information. This table contains exactly one dataset.
-
-*qlivestats.columns* - a complete list of all tables and columns available via Livestatus, including descriptions!
-
-*qlivestats.statehist* - 1.2.1i2 sla statistics for hosts and services, joined with data from hosts, services and log.
-
+| Attribute                        | Description                                                                                 |
+|----------------------------------|---------------------------------------------------------------------------------------------|
+| *qlivestats.hosts*               | Your Nagios hosts                                                                           |
+| *qlivestats.services*            | Your Nagios services joined with all data from hosts                                        |
+| *qlivestats.hostgroups*          | You Nagios hostgroups                                                                       |
+| *qlivestats.servicegroups*       | You Nagios servicegroups                                                                    |
+| *qlivestats.contactgroups*       | You Nagios contact groups                                                                   |
+| *qlivestats.servicesbygroup*     | All services grouped by service groups                                                      |
+| *qlivestats.servicesbyhostgroup* | All services grouped by host groups                                                         |
+| *qlivestats.hostsbygroup*        | All hosts group by host groups                                                              |
+| *qlivestats.contacts*            | Your Nagios contacts                                                                        |
+| *qlivestats.commands*            | Your defined Nagios commands                                                                |
+| *qlivestats.timeperiods*         | Time period definitions (currently only name and alias)                                     |
+| *qlivestats.downtimes*           | All scheduled host and service downtimes joined with data from hosts and services.          |
+| *qlivestats.comments*            | All host and service comments                                                               |
+| *qlivestats.log*                 | A transparent access to the nagios logfiles (include archived ones)ones                     |
+| *qlivestats.status*              | General performance and status information. This table contains exactly one dataset.        |
+| *qlivestats.columns*             | A complete list of all tables and columns available via Livestatus including descriptions!  |
+| *qlivestats.statehist*           | SLA statistics for hosts and services joined with data from hosts services and log. |
 
 # Filters
 
