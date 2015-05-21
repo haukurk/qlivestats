@@ -1,5 +1,4 @@
 from qlivestats.core.qsocket import Socket, SocketConnectionError 
-from qlivestats.core import config
 
 from mock import patch
 
@@ -12,8 +11,7 @@ class SocketTests(TestCase):
 
     def __init__(self, *args, **kwargs):
         super(SocketTests, self).__init__(*args, **kwargs)
-        self.cfg = config.YAMLConfig(os.path.join(tests_dir, 
-                                                  'configtst/qlivestats.yaml'))
+        self.broker = '/usr/share/spool/brokerdummy'
 
     @patch('qlivestats.core.qsocket.socket.socket')
     def test_connect_socket(self, qsmock):
@@ -34,7 +32,7 @@ class SocketTests(TestCase):
         qsmock.return_value.recv.return_value = expValue 
         qsmock.return_value.connect.return_value = ''
         
-        _socket = Socket(self.cfg)
+        _socket = Socket(self.broker)
 
         results = _socket.get("get hosts\n")
 
@@ -43,7 +41,7 @@ class SocketTests(TestCase):
                          )
 
     def test_failconnect_socket(self):
-        _socket = Socket(self.cfg)
+        _socket = Socket(self.broker)
         self.assertRaises(SocketConnectionError, lambda: list(_socket.connect()))
 
 
