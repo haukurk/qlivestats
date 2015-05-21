@@ -14,8 +14,8 @@ class SocketConnectionTimeoutError(BaseSocketError):
 
 
 class BaseSocket(object):
-    def __init__(self, cfg):
-        self.broker = cfg.get_broker()
+    def __init__(self, broker):
+        self.broker = broker 
         self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
 
