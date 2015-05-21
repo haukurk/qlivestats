@@ -2,3 +2,14 @@
 *.pyc
 *.swp
 __pycache__
+*.log
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover

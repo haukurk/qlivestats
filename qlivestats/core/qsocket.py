@@ -36,5 +36,5 @@ class Socket(BaseSocket):
             return self.socket.recv(100000000)
 
     def close(self):
-        self.socket.close()
+        self.socket.shutdown(socket.SHUT_WR)
 
