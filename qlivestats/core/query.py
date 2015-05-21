@@ -10,6 +10,9 @@ class NotSupportTableError(BaseQueryError):
 class NoTableSpecifiedError(BaseQueryError):
     pass
 
+class BrokerNotSpecified(BaseQueryError):
+    pass
+
 class Query(object):
 
     def __init__(self, broker=None):
@@ -31,6 +34,14 @@ class Query(object):
             raise NotSupportTableError("The table you want to query does not exist.")
 
         return self
+
+    def run(self):
+        if not self.broker:
+            raise BrokerNotSpecified("Live Status broker is not defined for the query.")    
+
+        qs = qsocket.Socket(self.broker)
+
+        return qs.get(str(self))
 
     def __str__(self):
         if not self.table:

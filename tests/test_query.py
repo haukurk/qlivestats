@@ -1,5 +1,5 @@
 from qlivestats.core import config
-from qlivestats.core.query import Query 
+from qlivestats.core.query import Query, NotSupportTableError
 from qlivestats.core.qsocket import Socket
 
 from unittest import TestCase
@@ -44,3 +44,6 @@ class QueryTests(TestCase):
 
         self.assertEqual(str(query), "GET services\nFilter: state = 2\n"
                          "Filter: in_notification_period = 1\n")
+
+    def test_bad_table(self):
+        self.assertRaises(NotSupportTableError, lambda: list(self._q.somebadtable))
