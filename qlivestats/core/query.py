@@ -40,7 +40,6 @@ class Query(object):
             raise BrokerNotSpecified("Live Status broker is not defined for the query.")    
 
         qs = qsocket.Socket(self.broker)
-
         return qs.get(str(self))
 
     def __str__(self):

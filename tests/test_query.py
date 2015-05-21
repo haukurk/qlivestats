@@ -1,9 +1,9 @@
 from qlivestats.core import config
-from qlivestats.core.query import Query, NotSupportTableError
+from qlivestats.core.query import Query, NotSupportTableError, BrokerNotSpecified
 from qlivestats.core.qsocket import Socket
 
 from unittest import TestCase
-from mock import Mock
+import mock
 import os
 from tests import tests_dir
 os.chdir(tests_dir)
@@ -47,3 +47,23 @@ class QueryTests(TestCase):
 
     def test_bad_table(self):
         self.assertRaises(NotSupportTableError, lambda: list(self._q.somebadtable))
+
+    def test_trying_to_load_default_config_that_does_not_have_broker_defined(self):
+        with mock.patch('qlivestats.core.config.YAMLConfig') as MockClass:
+            confInst = MockClass.return_value
+            confInst.get_broker.return_value = None
+            query = Query()
+            self.assertRaises(BrokerNotSpecified, lambda: list(query.services.run()))
+
+    def test_bad_config_when_getting_default(self):
+        self.assertRaises(config.ConfigReadError, lambda: list(Query()))
+
+    def test_run_query(self):
+        with mock.patch('qlivestats.core.qsocket.socket.socket') as socketmock:
+            socketmock.return_value.recv.return_value = "Not important"
+            socketmock.return_value.connect.return_value = ''
+            res = self._q.services.run()
+            self.assertEqual(res,'Not important')
+
+
+
