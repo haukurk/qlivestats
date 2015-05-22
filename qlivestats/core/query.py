@@ -40,7 +40,7 @@ class Query(object):
             raise BrokerNotSpecified("Live Status broker is not defined for the query.")    
 
         qs = qsocket.Socket(self.broker)
-        return qs.get(str(self))
+        return eval(qs.get(str(self)))
 
     def __str__(self):
         if not self.table:
@@ -57,7 +57,10 @@ class Query(object):
             for filter in self.filters:
                 query_string += "\nFilter: %s" % (filter)
 
-        return query_string + "\n"
+        # Lets make it easily parseble.
+        query_string += "\nOutputFormat: python\n"
+
+        return query_string 
 
     def Filter(self, filter):
         if filter not in self.filters:
