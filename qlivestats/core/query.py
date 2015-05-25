@@ -1,9 +1,6 @@
-import simplejson as json
-
 from qlivestats.core import qsocket
 from qlivestats.core import config
 from qlivestats.core import logger
-from qlivestats.helpers import json as jsonhelp
 
 class BaseQueryError(Exception):
     pass
@@ -15,9 +12,6 @@ class NoTableSpecifiedError(BaseQueryError):
     pass
 
 class BrokerNotSpecified(BaseQueryError):
-    pass
-
-class JSONNotWellFormedFromServer(BaseQueryError):
     pass
 
 
@@ -56,7 +50,7 @@ class Query(object):
         if not raw_results:
             return []
 
-        table = [ line.split(';') for line in raw_results.split('\n')[:-1] ] 
+        table = [ line.split(';') for line in raw_results.split('\n') ] 
 
         # Note that first dict in the parsed object are our headers.
 
@@ -89,6 +83,24 @@ class Query(object):
         query_string += "\n"
 
         return query_string
+
+    def Describe(self):
+        if not self.table:
+            raise NoTableSpecifiedError("You have to specify a query table.")
+
+        query_string = 'GET %s' % (self.table)
+        query_string += '\nLimit: 1\nColumnHeaders: on\n'
+
+        qs = qsocket.Socket(self.broker)
+        raw_results = qs.get(query_string)
+
+        if not raw_results:
+            return []
+
+        table = [ line.split(';') for line in raw_results.split('\n') ] 
+                                          
+        return table[0]
+
 
     def Filter(self, filter):
         if filter not in self.filters:
