@@ -27,33 +27,36 @@ Attribute for *qlivestats.Query*.
 | *columns*             | A complete list of all tables and columns available via Livestatus including descriptions!  |
 | *statehist*           | SLA statistics for hosts and services joined with data from hosts services and log. |
 
-Functions for *qlivestas.Query*:
+Functions for **qlivestas.Query.hosts|services|...|statehist**:
 
 | Function                        | Description                                                     |
 |----------------------------------|-----------------------------------------------------------------|
 | *Filter(STRING)*               | Filter your query                                                         | 
-| *Column(STRING)*            | Only include certain column (one). Can be chained with more column function calls.               |        
-| *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                            |                          
+| *Column(STRING)*            | Only include certain column (one). Can be chained with more column function calls.|        
+| *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                    |
 | *Describe()*           | Describe what columns are available for table that have been choosen by using the attributes above. | 
 
-*Note, Filter, Column and Columns can be chained.* 
+Note that *Filter*, *Column* and *Columns* can be chained, like:
+```
+Query().hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run()
+```
 
-Like such: Query().hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run().
+# Usage
 
-# Filters
+## Filters
 
-Its easy to use filters:
+To filter your result set, you use the ```Filter``` function. This allows you to fetch you specific data much faster then by using the whole set.
 
+The following example queries information about ```hosts``` from your LiveStatus broker, that **contains** ```purple``` in the hostname column:
 
 ```
 import qlivestats
 
 query = qlivestats.Query("/var/spool/livestatus/broker")
-
-result = query.hosts.filter("hostname ~ purple").run()
+result = query.hosts.Filter("host_name ~ purple").run()
 ```
 
-operators available for filters:
+Following operators are available when using filters:
 
 | symbol  | operation                                   | on numbers  | on texts  |
 |-------- |-------------------------------------------- |------------ |---------- |
@@ -72,14 +75,17 @@ operators available for filters:
 
 To get more in-depth inforatmion about the LQL (LiveStatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
 
-# Columns
+## Columns
 
-Its easy to include only columns that you are interested in:
+You can specifiy what columns to include when querying information:
+
+The following example only selects ```perf_data``` when displaying information from you **services**:
 
 ```
 import qlivestats
 
 query = qlivestats.Query("/var/spool/livestatus/broker")
-
-result = query.services.Column('perf_data').Filter("description ~ CPU util")                                                             
+result = query.services.Column('perf_data').Filter("description = CPU utilization")                                                             
 ```
+
+Note that we have a chained function ```Filter``` that filters information that has **description** equal to ```CPU util```.
