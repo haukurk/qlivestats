@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/haukurk/qlivestats.svg?branch=master)](https://travis-ci.org/haukurk/qlivestats)
 [![Coverage Status](https://coveralls.io/repos/haukurk/qlivestats/badge.svg?branch=master)](https://coveralls.io/r/haukurk/qlivestats?branch=master)
 # qlivestats
-QLiveStats is a library to query the Live Status broker for Nagios.
+QLiveStats is a library to query the **Livestatus** broker for Nagios.
 
-# Live Status Querying
+# Livestatus Querying
 
 Attributes for object *qlivestats.Query*.
 
@@ -36,25 +36,25 @@ Functions for **qlivestas.Query.attribute**, where attributes can be from the ab
 | *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                    |
 | *Describe()*           | Describe what columns are available for table that have been choosen by using the attributes above. | 
 
-Note that the functions *Filter*, *Column* and *Columns* can be chained:
+Note: The functions **Filter**, **Column** and **Columns** can be chained:
 ```
+from qlivestats import Query
 query = Query()
-query.hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run()
+query.hosts.Filter("name ~ servername").Filter("acknowledged = 0").Column("name").run()
 ```
 
 # Usage
 
 ## Filters
 
-To filter your result set, you use the ```Filter``` function. This allows you to fetch you specific data much faster then by using the whole set.
+To filter your results, you can use the ```Filter``` function. This allows you to query specific data much faster.
 
-The following example queries information about ```hosts``` from your LiveStatus broker, that **contains** ```purple``` in the hostname column:
+The following example queries information about ```hosts``` from your **Livestatus** broker, that only **contains** ```purple``` in the name column:
 
 ```
 import qlivestats
-
 query = qlivestats.Query("/var/spool/livestatus/broker")
-result = query.hosts.Filter("host_name ~ purple").run()
+result = query.hosts.Filter("name ~ purple").run()
 ```
 
 Following operators are available when using filters:
@@ -74,7 +74,7 @@ Following operators are available when using filters:
 | `!=~`     | is not equal when ignoring case             | no          | yes       |
 | `!~~`     | does not match regular expression ignoring case | no      | yes       | 
 
-To get more in-depth inforatmion about the LQL (LiveStatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
+To get more in-depth inforatmion about the LQL (Livestatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
 
 ## Columns
 
@@ -84,7 +84,6 @@ The following example only selects ```perf_data``` when displaying information f
 
 ```
 import qlivestats
-
 query = qlivestats.Query("/var/spool/livestatus/broker")
 result = query.services.Column('perf_data').Filter("description = CPU utilization")                                                             
 ```
