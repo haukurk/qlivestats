@@ -5,7 +5,7 @@ QLiveStats is a library to query the Live Status broker for Nagios.
 
 # Live Status Querying
 
-Attribute for object *qlivestats.Query*.
+Attributes for object *qlivestats.Query*.
 
 | Attribute                        | Description                                                                                 |
 |----------------------------------|---------------------------------------------------------------------------------------------|
