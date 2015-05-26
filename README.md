@@ -89,3 +89,24 @@ result = query.services.Column('perf_data').Filter("description = CPU utilizatio
 ```
 
 Note that we have a chained function ```Filter``` that filters information that has **description** equal to ```CPU util```.
+
+# Command Line Interface
+
+## Configuration
+The default location for the qlivestats command line interface is ```/etc/qlivestats.yaml```
+
+It's constructed as following:
+```
+%YAML 1.2
+---
+livestatus:
+  broker: "/usr/share/nagios/livestatus"
+```
+## CLI Usage
+
+The following commands are exported from the qlivestats package.
+* qlivestats
+* qlivestats-describe
+
+
+
