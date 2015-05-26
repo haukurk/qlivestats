@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/haukurk/qlivestats.svg?branch=master)](https://travis-ci.org/haukurk/qlivestats)
 [![Coverage Status](https://coveralls.io/repos/haukurk/qlivestats/badge.svg?branch=master)](https://coveralls.io/r/haukurk/qlivestats?branch=master)
 # qlivestats
-QLiveStats is a library to query the Live Status broker for Nagios.
+QLiveStats is a library to query the **Livestatus** broker for Nagios.
 
-# Live Status Querying
+# Livestatus Querying
 
 Attributes for object *qlivestats.Query*.
 
@@ -47,9 +47,9 @@ query.hosts.Filter("name ~ servername").Filter("acknowledged = 0").Column("name"
 
 ## Filters
 
-To filter your result set, you use the ```Filter``` function. This allows you to fetch you specific data much faster then by using the whole set.
+To filter your results, you can use the ```Filter``` function. This allows you to query specific data much faster.
 
-The following example queries information about ```hosts``` from your LiveStatus broker, that **contains** ```purple``` in the name column:
+The following example queries information about ```hosts``` from your **Livestatus** broker, that only **contains** ```purple``` in the name column:
 
 ```
 import qlivestats
@@ -74,7 +74,7 @@ Following operators are available when using filters:
 | `!=~`     | is not equal when ignoring case             | no          | yes       |
 | `!~~`     | does not match regular expression ignoring case | no      | yes       | 
 
-To get more in-depth inforatmion about the LQL (LiveStatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
+To get more in-depth inforatmion about the LQL (Livestatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
 
 ## Columns
 
