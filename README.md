@@ -36,7 +36,7 @@ Functions for **qlivestas.Query.attribute**, where attributes can be from the ab
 | *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                    |
 | *Describe()*           | Describe what columns are available for table that have been choosen by using the attributes above. | 
 
-Note: The functions *Filter*, *Column* and *Columns* can be chained:
+Note: The functions **Filter**, **Column** and **Columns** can be chained:
 ```
 from qlivestats import Query
 query = Query()
