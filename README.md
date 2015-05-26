@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/haukurk/qlivestats.svg?branch=master)](https://travis-ci.org/haukurk/qlivestats)
 [![Coverage Status](https://coveralls.io/repos/haukurk/qlivestats/badge.svg?branch=master)](https://coveralls.io/r/haukurk/qlivestats?branch=master)
 # qlivestats
-QLiveStats is a library/client to query the Live Status broker for Nagios.
+QLiveStats is a library to query the Live Status broker for Nagios.
 
 # Live Status Querying
 
-Attribute for *qlivestats.Query*.
+Attribute for object *qlivestats.Query*.
 
 | Attribute                        | Description                                                                                 |
 |----------------------------------|---------------------------------------------------------------------------------------------|
@@ -27,7 +27,7 @@ Attribute for *qlivestats.Query*.
 | *columns*             | A complete list of all tables and columns available via Livestatus including descriptions!  |
 | *statehist*           | SLA statistics for hosts and services joined with data from hosts services and log. |
 
-Functions for **qlivestas.Query.hosts|services|...|statehist**:
+Functions for **qlivestas.Query.attribute**, where attributes can be from the above lists:
 
 | Function                        | Description                                                     |
 |----------------------------------|-----------------------------------------------------------------|
@@ -36,9 +36,10 @@ Functions for **qlivestas.Query.hosts|services|...|statehist**:
 | *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                    |
 | *Describe()*           | Describe what columns are available for table that have been choosen by using the attributes above. | 
 
-Note that *Filter*, *Column* and *Columns* can be chained, like:
+Note that the functions *Filter*, *Column* and *Columns* can be chained:
 ```
-Query().hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run()
+query = Query()
+query.hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run()
 ```
 
 # Usage
@@ -60,18 +61,18 @@ Following operators are available when using filters:
 
 | symbol  | operation                                   | on numbers  | on texts  |
 |-------- |-------------------------------------------- |------------ |---------- |
-| =       | equality                                    | yes         | yes       |
-| ~       | match regular expression (substring match)  | no          | yes       |
-| =~      | equality ignoring case                      | no          | yes       |
-| ~~      | regular expression ignoring case            | no          | yes       |
-| <       | less than                                   | yes         | yes       |
-| >       | greater than                                | yes         | yes       |
-| <=      | less or equal                               | yes         | yes       |
-| >=      | greater or equal                            | yes         | yes       |
-| !=      | is not equal                                | yes         | yes       |
-| !~      | does not match regular expression (substring match) | no  | yes       |
-| !=~     | is not equal when ignoring case             | no          | yes       |
-| !~~     | does not match regular expression ignoring case | no      | yes       | 
+| `=`       | equality                                    | yes         | yes       |
+| `~`       | match regular expression (substring match)  | no          | yes       |
+| `=~`      | equality ignoring case                      | no          | yes       |
+| `~~`      | regular expression ignoring case            | no          | yes       |
+| `<`       | less than                                   | yes         | yes       |
+| `>`       | greater than                                | yes         | yes       |
+| `<=`      | less or equal                               | yes         | yes       |
+| `>=`      | greater or equal                            | yes         | yes       |
+| `!=`      | is not equal                                | yes         | yes       |
+| `!~`      | does not match regular expression (substring match) | no  | yes       |
+| `!=~`     | is not equal when ignoring case             | no          | yes       |
+| `!~~`     | does not match regular expression ignoring case | no      | yes       | 
 
 To get more in-depth inforatmion about the LQL (LiveStatus Query Language), please visit https://mathias-kettner.de/checkmk_livestatus.html.
 
@@ -88,4 +89,4 @@ query = qlivestats.Query("/var/spool/livestatus/broker")
 result = query.services.Column('perf_data').Filter("description = CPU utilization")                                                             
 ```
 
-Note that we have a chained function ```Filter``` that filters information that has **description** equal to ```CPU util```.
+Note that we have a chained function ```Filter``` that filters information that has **description** equal to ```CPU utilization```.
