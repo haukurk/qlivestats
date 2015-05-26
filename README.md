@@ -36,10 +36,11 @@ Functions for **qlivestas.Query.attribute**, where attributes can be from the ab
 | *Columns(STRING)*          | Only Include cartain set of columns (many) seperated with whitespace.                    |
 | *Describe()*           | Describe what columns are available for table that have been choosen by using the attributes above. | 
 
-Note that the functions *Filter*, *Column* and *Columns* can be chained:
+Note: The functions *Filter*, *Column* and *Columns* can be chained:
 ```
+from qlivestats import Query
 query = Query()
-query.hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("host_name").run()
+query.hosts.Filter("name ~ servername").Filter("acknowledged = 0").Column("name").run()
 ```
 
 # Usage
@@ -48,11 +49,10 @@ query.hosts.Filter("host_name ~ servername").Filter("acknowledged = 0").Column("
 
 To filter your result set, you use the ```Filter``` function. This allows you to fetch you specific data much faster then by using the whole set.
 
-The following example queries information about ```hosts``` from your LiveStatus broker, that **contains** ```purple``` in the hostname column:
+The following example queries information about ```hosts``` from your LiveStatus broker, that **contains** ```purple``` in the name column:
 
 ```
 import qlivestats
-
 query = qlivestats.Query("/var/spool/livestatus/broker")
 result = query.hosts.Filter("host_name ~ purple").run()
 ```
@@ -84,7 +84,6 @@ The following example only selects ```perf_data``` when displaying information f
 
 ```
 import qlivestats
-
 query = qlivestats.Query("/var/spool/livestatus/broker")
 result = query.services.Column('perf_data').Filter("description = CPU utilization")                                                             
 ```
