@@ -54,7 +54,7 @@ The following example queries information about ```hosts``` from your **Livestat
 ```
 import qlivestats
 query = qlivestats.Query("/var/spool/livestatus/broker")
-result = query.hosts.Filter("host_name ~ purple").run()
+result = query.hosts.Filter("name ~ purple").run()
 ```
 
 Following operators are available when using filters:
