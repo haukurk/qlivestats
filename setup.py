@@ -18,6 +18,9 @@ setup(
     test_requires=['mock'],
     classifiers=[],
     entry_points={
-        'console_scripts': ['qlivestats=qlivestats:qlivestatsquery'],
+        'console_scripts': [
+            'qlivestats=qlivestats:qlivestatsquery',
+            'qlivestats-describe=qlivestats:qlivestatsdescribe'
+        ],
     }
 )
